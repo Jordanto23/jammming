@@ -1,16 +1,22 @@
 import React from "react";
 import Tracklist from "./Tracklist";
+import Spotify from "./Spotify";
 
 function Playlist({ playlistName, setPlaylistName, playlistTracks, setPlaylistTracks }) {
+  const handleNameChange = (e) => setPlaylistName(e.target.value);
 
-  // Handler for when the user types a new name
-  const handleNameChange = (event) => {
-    setPlaylistName(event.target.value);
+  const savePlaylist = () => {
+    if (!playlistTracks.length) return;
+
+    const trackUris = playlistTracks.map(track => track.uri);
+    Spotify.savePlaylist(playlistName, trackUris);
+
+    setPlaylistName("New Playlist");
+    setPlaylistTracks([]);
   };
 
   return (
     <div className="Playlist">
-      {/* Editable input for playlist name */}
       <input
         type="text"
         value={playlistName}
@@ -18,17 +24,14 @@ function Playlist({ playlistName, setPlaylistName, playlistTracks, setPlaylistTr
         placeholder="Playlist Name"
       />
 
-      {/* Render tracks in the playlist */}
       <Tracklist
         tracks={playlistTracks}
         playlistTracks={playlistTracks}
         setPlaylistTracks={setPlaylistTracks}
-        isRemoval={true} // "-" button for removing tracks
+        isRemoval={true}
       />
 
-      <button onClick={() => alert("Saving playlist to Spotify!")}>
-        Save to Spotify
-      </button>
+      <button onClick={savePlaylist}>Save to Spotify</button>
     </div>
   );
 }

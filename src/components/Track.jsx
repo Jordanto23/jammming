@@ -1,15 +1,7 @@
 import React from "react";
 
-function Track({ track, playlistTracks, setPlaylistTracks, isRemoval }) {
-  const addTrack = () => {
-    if (!playlistTracks.find((savedTrack) => savedTrack.id === track.id)) {
-      setPlaylistTracks([...playlistTracks, track]);
-    }
-  };
-
-  const removeTrack = () => {
-    setPlaylistTracks(playlistTracks.filter((t) => t.id !== track.id));
-  };
+function Track({ track, onAdd, onRemove, isRemoval }) {
+  const handleClick = () => (isRemoval ? onRemove(track) : onAdd(track));
 
   return (
     <div className="Track">
@@ -17,11 +9,7 @@ function Track({ track, playlistTracks, setPlaylistTracks, isRemoval }) {
         <h3>{track.name}</h3>
         <p>{track.artist} | {track.album}</p>
       </div>
-      {isRemoval ? (
-        <button onClick={removeTrack}>-</button>
-      ) : (
-        <button onClick={addTrack}>+</button>
-      )}
+      <button onClick={handleClick}>{isRemoval ? "-" : "+"}</button>
     </div>
   );
 }

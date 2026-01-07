@@ -9,7 +9,7 @@ function SearchResults({ searchResults, playlistTracks, setPlaylistTracks }) {
         tracks={searchResults}
         playlistTracks={playlistTracks}
         setPlaylistTracks={setPlaylistTracks}
-        isRemoval={false} // + button for adding
+        isRemoval={false}
       />
     </div>
   );
