@@ -1,8 +1,8 @@
-import SearchBar from './components/SearchBar';
-import SearchResults from './components/SearchResults';
-import Playlist from './components/Playlist';
-import './App.css';
-
+import React, { useState } from "react";
+import SearchBar from "./components/SearchBar";
+import SearchResults from "./components/SearchResults";
+import Playlist from "./components/Playlist";
+import "./App.css";
 
 const searchResults = [
   {
@@ -27,6 +27,8 @@ const searchResults = [
 
 
 function App() {
+    const [playlistName, setPlaylistName] = useState("My Playlist");
+  const [playlistTracks, setPlaylistTracks] = useState([]);
   return (
     <div className="App">
       <h1>Jammming</h1>
@@ -34,8 +36,13 @@ function App() {
       <SearchBar />
 
       <div className="App-playlists">
-        <SearchResults searchResults={searchResults} />
-        <Playlist />
+        <SearchResults searchResults={searchResults}
+          playlistTracks={playlistTracks}
+          setPlaylistTracks={setPlaylistTracks} />
+        <Playlist  playlistName={playlistName}
+          setPlaylistName={setPlaylistName} 
+          playlistTracks={playlistTracks}
+          setPlaylistTracks={setPlaylistTracks} />
       </div>
     </div>
   );

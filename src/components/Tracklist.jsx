@@ -1,11 +1,17 @@
-import React from 'react';
-import Track from './Track';
+import React from "react";
+import Track from "./Track";
 
-function Tracklist({ tracks =  []}) {
+function Tracklist({ tracks = [], playlistTracks, setPlaylistTracks, isRemoval }) {
   return (
     <div className="Tracklist">
       {tracks.map((track) => (
-        <Track key={track.id} track={track} />
+        <Track
+          key={track.id}
+          track={track}
+          playlistTracks={playlistTracks}
+          setPlaylistTracks={setPlaylistTracks}
+          isRemoval={isRemoval}
+        />
       ))}
     </div>
   );

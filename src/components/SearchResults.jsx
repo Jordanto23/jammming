@@ -1,10 +1,16 @@
-import Tracklist from './Tracklist';
+import React from "react";
+import Tracklist from "./Tracklist";
 
-function SearchResults({ searchResults }) {
+function SearchResults({ searchResults, playlistTracks, setPlaylistTracks }) {
   return (
     <div className="SearchResults">
       <h2>Results</h2>
-      <Tracklist tracks={searchResults}  />
+      <Tracklist
+        tracks={searchResults}
+        playlistTracks={playlistTracks}
+        setPlaylistTracks={setPlaylistTracks}
+        isRemoval={false} // + button for adding
+      />
     </div>
   );
 }

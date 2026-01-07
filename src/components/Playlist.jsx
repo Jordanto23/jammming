@@ -1,11 +1,27 @@
-import Tracklist from './Tracklist';
+import React from "react";
+import Tracklist from "./Tracklist";
 
-function Playlist() {
+function Playlist({ playlistName, setPlaylistName, playlistTracks, setPlaylistTracks }) {
+  const handleNameChange = (e) => {
+    setPlaylistName(e.target.value);
+  };
+
   return (
     <div className="Playlist">
-      <h2>Playlist Name</h2>
-      <Tracklist />
-      <button>Save To Spotify</button>
+      <input
+        value={playlistName}
+        onChange={handleNameChange}
+        placeholder="Playlist Name"
+      />
+      <Tracklist
+        tracks={playlistTracks}
+        playlistTracks={playlistTracks}
+        setPlaylistTracks={setPlaylistTracks}
+        isRemoval={true} // - button for removing
+      />
+      <button onClick={() => alert("Saving playlist to Spotify!")}>
+        Save to Spotify
+      </button>
     </div>
   );
 }
